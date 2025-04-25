@@ -12,3 +12,5 @@ export * from './ItemList';
 export * from './ReasonModel';
 export * from './ReasonList';
 export * from './QrCodeDetailModel';
+export * from './InspectionModel';
+export * from './InspectionList';

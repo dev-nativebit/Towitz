@@ -3,7 +3,7 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {ClearReduxThunkCall, LoginAgainThunkCall, LoginThunkCall} from '@/redux/thunk/LoginThunk';
 import {loginReducer} from '@/redux/slice/LoginSlice';
 import {
-  approveRequestApiThunkCall,
+  approveRequestApiThunkCall, getInspectionListApiThunkCall,
   getRequestListApiThunkCall,
   qrCodeDetailApiThunkCall, saveInspectionApiThunkCall,
 } from '@/redux/thunk/RequestThunk';
@@ -17,6 +17,7 @@ export const actions = {
   ClearReduxThunkCallActions: ClearReduxThunkCall,
   qrCodeDetailApiThunkCallActions: qrCodeDetailApiThunkCall,
   saveInspectionApiThunkCallActions: saveInspectionApiThunkCall,
+  getInspectionListApiThunkCallActions: getInspectionListApiThunkCall,
 
 };
 

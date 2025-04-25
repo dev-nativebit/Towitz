@@ -1,7 +1,7 @@
 import {dispatchable} from '@/redux/dispatchable';
 import {
   approveRequestApi,
-  ApproveRequestApiParams,
+  ApproveRequestApiParams, getInspectionListApi, GetInspectionListApiParams,
   getQrCodeDetailApi, GetQrCodeDetailApiParams,
   getRequestListApi,
   GetRequestListApiParams, saveInspectionApi, SaveInspectionApiParams,
@@ -9,8 +9,8 @@ import {
 import {Dispatch} from 'react';
 import {Action} from 'redux-saga';
 import {getDefaultError, Result} from '@/core';
-import {QrCodeDetailModel, RequestList} from '@/model';
-import {QrCodeDetailDto, RequestDto} from '@/dtos';
+import {InspectionList, QrCodeDetailModel, RequestList} from '@/model';
+import {InspectionDto, QrCodeDetailDto, RequestDto} from '@/dtos';
 import {ToastAndroid} from 'react-native';
 import {requestActions} from '@/redux/slice/RequestSlice';
 
@@ -132,6 +132,37 @@ export const qrCodeDetailApiThunkCall = dispatchable((params: GetQrCodeDetailApi
       } catch (e) {
         //Dispatch to fail the response
         return getDefaultError(e, 'CATCH qrCodeDetailApiThunkCall');
+      }
+    };
+  },)
+
+
+export const getInspectionListApiThunkCall = dispatchable((params: GetInspectionListApiParams) => {
+    return async (dispatch: Dispatch<Action>) => {
+      try {
+        dispatch(requestActions.getInspectionList(Result.waiting()));
+        const response = await getInspectionListApi.post(params);
+
+        if (response.isSuccess) {
+          //Parse dto from api response top model
+          const dataModel = new InspectionList(response.data as InspectionDto)
+          // await LoginAgainThunkCall();
+          //Wrap with result class
+          const resultDataModel = Result.ok(dataModel);
+          //Dispatch to store in to redux
+          dispatch(requestActions.getInspectionList(resultDataModel));
+          ToastAndroid.show(response?.message ?? '', ToastAndroid.LONG);
+          //Return the result, so it can be used where api triggered
+          return response;
+        } else {
+          ToastAndroid.show(response?.error ?? '', ToastAndroid.LONG);
+        }
+        //Dispatch to fail the response
+        dispatch(requestActions.getInspectionList(Result.fail('getInspectionListApiThunkCall')));
+        return getDefaultError(response.error, 'getInspectionListApiThunkCall');
+      } catch (e) {
+        //Dispatch to fail the response
+        return getDefaultError(e, 'CATCH getInspectionListApiThunkCall');
       }
     };
   },

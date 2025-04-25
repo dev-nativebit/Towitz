@@ -1,5 +1,5 @@
 import {Result} from '@/core';
-import {QrCodeDetailModel, RequestList} from '@/model';
+import {InspectionList, QrCodeDetailModel, RequestList} from '@/model';
 import {createSlice} from '@reduxjs/toolkit';
 import { REQUEST } from "@/redux/slice/Types";
 import RequestReducer from "@/redux/reducer/RequestReducer";
@@ -9,6 +9,7 @@ export interface RequestSliceType {
   approveRequest?: Result<string>;
   saveInspection?: Result<string>;
   QrCodeDetail?: Result<QrCodeDetailModel>;
+  getInspectionList?: Result<InspectionList>;
   // forceUpdate?:Result<ForceUpdateModel>
 }
 
