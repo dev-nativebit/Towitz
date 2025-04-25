@@ -2,3 +2,4 @@ export * from './LoginScreen';
 export * from './DashboardScreen';
 export * from './RequestDetailScreen';
 export * from './QRScannerScreen';
+export * from './QrDetailScreen';

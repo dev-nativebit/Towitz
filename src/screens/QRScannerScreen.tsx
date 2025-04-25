@@ -1,13 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {hideFullScreenProgress, Screen, showFullScreenProgress, StatusBarType, Text} from '@/component';
+import {
+  hideFullScreenProgress,
+  Screen,
+  showFullScreenProgress,
+  StatusBarType,
+  Text,
+} from '@/component';
 import {useTheme} from '@shopify/restyle';
 import {Theme} from '@/style';
-import {Camera, useCameraDevice, useCodeScanner} from 'react-native-vision-camera';
+import {
+  Camera,
+  useCameraDevice,
+  useCodeScanner,
+} from 'react-native-vision-camera';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {goBack} from '@/navigation/AppNavigation';
+import {goBack, navigate, Routes} from '@/navigation/AppNavigation';
 import {GetQrCodeDetailApiParams} from '@/api';
 import {actions} from '@/redux/root.store';
-import {qrCodeDetailApiThunkCall} from '@/redux/thunk/RequestThunk';
 
 
 export const QRScannerScreen:React.FC = () => {
@@ -37,6 +46,9 @@ export const QRScannerScreen:React.FC = () => {
       setQrValue('')
       if (response.isSuccess) {
         //Navigate to Detail Screen
+        navigate({
+          screenName:Routes.QrDetail
+        })
       }
     })
   }

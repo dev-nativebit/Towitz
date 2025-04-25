@@ -14,7 +14,7 @@ import {Storage} from '@/core/Storage';
 import RNSplashScreen from 'react-native-splash-screen';
 import {
   DashboardScreen,
-  LoginScreen, QRScannerScreen, RequestDetailScreen,
+  LoginScreen, QrDetailScreen, QRScannerScreen, RequestDetailScreen,
 } from '@/screens';
 import {actions} from '@/redux/root.store';
 import { RequestModel } from "@/model";
@@ -26,6 +26,7 @@ export type StackParamList = {
     data:RequestModel
   };
   QRScannerScreen:undefined
+  QrDetailScreen:undefined
 };
 
 const navigationRef = createNavigationContainerRef<StackParamList>();
@@ -35,6 +36,7 @@ export enum Routes {
   Login = 'LoginScreen',
   RequestDetail = 'RequestDetailScreen',
   QRScanner = 'QRScannerScreen',
+  QrDetail = 'QrDetailScreen',
 }
 export interface NavigationProps {
   screenName: Routes;
@@ -191,6 +193,11 @@ export const AppNavigator: React.FunctionComponent<AppNavigationProps> = ({
           <Stack.Screen
             name={Routes.RequestDetail}
             component={RequestDetailScreen}
+            options={horizontalAnimation}
+          />
+          <Stack.Screen
+            name={Routes.QrDetail}
+            component={QrDetailScreen}
             options={horizontalAnimation}
           />
         </Stack.Navigator>
