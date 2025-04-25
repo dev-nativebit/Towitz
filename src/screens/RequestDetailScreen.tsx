@@ -74,10 +74,6 @@ export const RequestDetailScreen:React.FC =() =>{
         backgroundColor={'antiFlashWhite2'}
         statusBarColor={colors.primary}
         statusBarType={StatusBarType.Dark}>
-
-        <ScreenHeader
-          title={'Request Detail'}
-        />
         <ScrollView showsVerticalScrollIndicator={false}>
           <Box
             backgroundColor={'white'}

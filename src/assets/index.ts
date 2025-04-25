@@ -80,4 +80,5 @@ export const Images = {
   send:require('./pngs/send.png'),
   clip:require('./pngs/clip.png'),
   leave:require('./pngs/leave.png'),
+  checked:require('./pngs/checked.png'),
 };

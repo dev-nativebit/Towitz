@@ -84,12 +84,6 @@ export const DashboardScreen: React.FC = () => {
 
   return (
     <Screen backgroundColor={'white'} statusBarType={StatusBarType.Dark}>
-      <Header
-        onDrawerPress={() => {}}
-        title={'Dashboard'}
-        isShowAttention={true}
-        onUserPress={handelOnLogoutPress}
-      />
       <Box marginTop={'sr'}>
         <TabButtons
           buttons={tabArray}
