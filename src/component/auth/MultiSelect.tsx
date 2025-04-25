@@ -405,9 +405,9 @@ const styles = StyleSheet.create({
     transform: [{translateY: -21}],
   },
   labelActive: {
-    color: '#2b96f1',
+    color: '#f17616',
   },
   inputFocused: {
-    borderColor: '#2b96f1',
+    borderColor: '#f17616',
   },
 });

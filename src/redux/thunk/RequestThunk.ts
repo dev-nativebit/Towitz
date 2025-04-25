@@ -4,7 +4,7 @@ import {
   ApproveRequestApiParams,
   getQrCodeDetailApi, GetQrCodeDetailApiParams,
   getRequestListApi,
-  GetRequestListApiParams,
+  GetRequestListApiParams, saveInspectionApi, SaveInspectionApiParams,
 } from '@/api';
 import {Dispatch} from 'react';
 import {Action} from 'redux-saga';
@@ -48,7 +48,7 @@ export const getRequestListApiThunkCall = dispatchable((params: GetRequestListAp
 export const approveRequestApiThunkCall = dispatchable((params: ApproveRequestApiParams) => {
     return async (dispatch: Dispatch<Action>) => {
       try {
-        dispatch(requestActions.requestList(Result.waiting()));
+        dispatch(requestActions.approveRequest(Result.waiting()));
         const response = await approveRequestApi.post(params);
 
         if (response.isSuccess) {
@@ -58,7 +58,7 @@ export const approveRequestApiThunkCall = dispatchable((params: ApproveRequestAp
           //Wrap with result class
           const resultDataModel = Result.ok(dataModel);
           //Dispatch to store in to redux
-          dispatch(requestActions.requestList(resultDataModel));
+          dispatch(requestActions.approveRequest(resultDataModel));
           ToastAndroid.show(response?.message ?? '', ToastAndroid.LONG);
           //Return the result, so it can be used where api triggered
           return response;
@@ -66,11 +66,41 @@ export const approveRequestApiThunkCall = dispatchable((params: ApproveRequestAp
           ToastAndroid.show(response?.error ?? '', ToastAndroid.LONG);
         }
         //Dispatch to fail the response
-        dispatch(requestActions.requestList(Result.fail('approveRequestApiThunkCall')));
+        dispatch(requestActions.approveRequest(Result.fail('approveRequestApiThunkCall')));
         return getDefaultError(response.error, 'approveRequestApiThunkCall');
       } catch (e) {
         //Dispatch to fail the response
         return getDefaultError(e, 'CATCH approveRequestApiThunkCall');
+      }
+    };
+  },
+)
+export const saveInspectionApiThunkCall = dispatchable((params: SaveInspectionApiParams) => {
+    return async (dispatch: Dispatch<Action>) => {
+      try {
+        dispatch(requestActions.saveInspection(Result.waiting()));
+        const response = await saveInspectionApi.post(params);
+
+        if (response.isSuccess) {
+          //Parse dto from api response top model
+          const dataModel = response.data
+          // await LoginAgainThunkCall();
+          //Wrap with result class
+          const resultDataModel = Result.ok(dataModel);
+          //Dispatch to store in to redux
+          dispatch(requestActions.saveInspection(resultDataModel));
+          ToastAndroid.show(response?.message ?? '', ToastAndroid.LONG);
+          //Return the result, so it can be used where api triggered
+          return response;
+        } else {
+          ToastAndroid.show(response?.error ?? '', ToastAndroid.LONG);
+        }
+        //Dispatch to fail the response
+        dispatch(requestActions.saveInspection(Result.fail('saveInspectionApiThunkCall')));
+        return getDefaultError(response.error, 'saveInspectionApiThunkCall');
+      } catch (e) {
+        //Dispatch to fail the response
+        return getDefaultError(e, 'CATCH saveInspectionApiThunkCall');
       }
     };
   },

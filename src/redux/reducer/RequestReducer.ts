@@ -16,6 +16,12 @@ export default {
   ) => {
     state.approveRequest = action.payload;
   },
+  'saveInspection': (
+    state: RequestSliceType,
+    action: PayloadAction<Result<string>>,
+  ) => {
+    state.saveInspection = action.payload;
+  },
   'QrCodeDetail': (
     state: RequestSliceType,
     action: PayloadAction<Result<QrCodeDetailModel>>,

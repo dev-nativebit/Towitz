@@ -7,6 +7,7 @@ import RequestReducer from "@/redux/reducer/RequestReducer";
 export interface RequestSliceType {
   requestList?: Result<RequestList>;
   approveRequest?: Result<string>;
+  saveInspection?: Result<string>;
   QrCodeDetail?: Result<QrCodeDetailModel>;
   // forceUpdate?:Result<ForceUpdateModel>
 }

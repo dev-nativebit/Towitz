@@ -18,10 +18,10 @@ import { goBack } from "@/navigation/AppNavigation";
 import {  ScrollView } from "react-native";
 import moment from "moment";
 import { Images } from "@/assets";
-import { ApproveRequestApiParams, GetRequestListApiParams } from "@/api";
+import {ApproveRequestApiParams, GetRequestListApiParams, SaveInspectionApiParams} from '@/api';
 import {actions, RootState, useAppSelector} from '@/redux/root.store';
 import { useForm } from "react-hook-form";
-import { customFormGenerator, RejectNotesIDs } from "@/customFormGenerator";
+import {customFormGenerator, InspectionIDs, RejectNotesIDs} from '@/customFormGenerator';
 import {QrCodeDetailModel, RequestList} from '@/model';
 import {QrCodeDetailDto} from '@/dtos';
 
@@ -40,8 +40,6 @@ export const QrDetailScreen:React.FC =() =>{
   const qrDetailResult = useAppSelector(
     (state: RootState) => state.requestDetail.QrCodeDetail,
   );
-  const form = useMemo(() => customFormGenerator.generateRejectNotesForm(), []);
-
   const qrDetail = useMemo(() => {
     if (qrDetailResult?.isSuccess) {
       return qrDetailResult.getValue();
@@ -49,9 +47,26 @@ export const QrDetailScreen:React.FC =() =>{
     return new QrCodeDetailModel({} as QrCodeDetailDto);
   }, [qrDetailResult]);
 
+  const form = useMemo(() => customFormGenerator.generateInspectionForm(qrDetail), []);
+
   const approveRejectApiCall = () =>{
     setIsVisibleNote(false)
-
+    const params: SaveInspectionApiParams = {
+      remark: getValues()[InspectionIDs.remark],
+      reason: getValues()[InspectionIDs.reason],
+      r_item_id: getValues()[InspectionIDs.item],
+      id: qrDetail.QrDetail.id,
+    };
+    showFullScreenProgress()
+    actions.saveInspectionApiThunkCallActions(params).then(value => {
+      hideFullScreenProgress()
+      if (value.isSuccess){
+        goBack()
+        setValue(InspectionIDs.item, '')
+        setValue(InspectionIDs.reason, '')
+        setValue(InspectionIDs.remark, '')
+      }
+    })
   }
 
   const handleOnPressNote = () => {
@@ -186,8 +201,7 @@ export const QrDetailScreen:React.FC =() =>{
               </Box>
               <Pressable
                 onPress={() =>{
-                  status.current = 'Approved'
-                  approveRejectApiCall()
+                  setIsVisibleNote(true)
                 }}
                 height={DeviceHelper.calculateWidthRatio(35)}
                 borderRadius={DeviceHelper.calculateWidthRatio(10)}
@@ -219,11 +233,12 @@ export const QrDetailScreen:React.FC =() =>{
           isVisible={isVisibleNote}
           onClose={()=>{
             setIsVisibleNote(false)
-            setValue(RejectNotesIDs.notes, '')
+
           }}
           fieldArray={form}
           control={control}
           errors={errors}
+          setValue={setValue}
           onSavePress={() =>{
             status.current = 'reject'
             handleOnPressNote()

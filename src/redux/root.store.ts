@@ -5,7 +5,7 @@ import {loginReducer} from '@/redux/slice/LoginSlice';
 import {
   approveRequestApiThunkCall,
   getRequestListApiThunkCall,
-  qrCodeDetailApiThunkCall,
+  qrCodeDetailApiThunkCall, saveInspectionApiThunkCall,
 } from '@/redux/thunk/RequestThunk';
 import { requestReducer } from "@/redux/slice/RequestSlice";
 
@@ -16,6 +16,7 @@ export const actions = {
   approveRequestApiThunkCallActions: approveRequestApiThunkCall,
   ClearReduxThunkCallActions: ClearReduxThunkCall,
   qrCodeDetailApiThunkCallActions: qrCodeDetailApiThunkCall,
+  saveInspectionApiThunkCallActions: saveInspectionApiThunkCall,
 
 };
 

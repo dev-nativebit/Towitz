@@ -1,4 +1,4 @@
-import {CustomFieldValidator, CustomFormField} from '@/model';
+import {CustomFieldValidator, CustomFormField, QrCodeDetailModel, QrDetailModel} from '@/model';
 import {
   CustomFieldValidatorDto,
   CustomFormFieldDto,
@@ -11,7 +11,12 @@ export enum LoginFormIDs {
   password = 'password',
 }
 export enum RejectNotesIDs{
-  notes = 'notes'
+  notes = 'remark'
+}
+export enum InspectionIDs{
+  remark = 'remark',
+  reason = 'reason',
+  item = 'item',
 }
 
 class CustomFormGenerator {
@@ -69,6 +74,49 @@ class CustomFormGenerator {
       label: "Notes",
       validator: this.generateValidator({
         required: true,
+      }),
+      textInputProps: {
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+      },
+    }));
+    return fields
+  }
+
+  generateInspectionForm(option:QrCodeDetailModel): CustomFormFieldList {
+    const fields: CustomFormFieldList = new CustomFormFieldList([]);
+    fields.addItem(this.generateField({
+      id: InspectionIDs.item,
+      type: CustomFormFieldType.dropdown,
+      label: "Item",
+      options:option.itemList.getLabelValuePair(),
+      validator: this.generateValidator({
+        required: true,
+      }),
+      textInputProps: {
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+      },
+    }));
+    fields.addItem(this.generateField({
+      id: InspectionIDs.reason,
+      type: CustomFormFieldType.dropdown,
+      label: "Reason",
+      options:option.reasonList.getLabelValuePair(),
+      validator: this.generateValidator({
+        required: true,
+      }),
+      textInputProps: {
+        keyboardType: 'default',
+        autoCapitalize: 'none',
+      },
+    }));
+    fields.addItem(this.generateField({
+      id: InspectionIDs.remark,
+      type: CustomFormFieldType.textArea,
+      label: "Remark",
+      validator: this.generateValidator({
+        required: false,
       }),
       textInputProps: {
         keyboardType: 'default',
