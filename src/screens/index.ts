@@ -3,3 +3,4 @@ export * from './DashboardScreen';
 export * from './RequestDetailScreen';
 export * from './QRScannerScreen';
 export * from './QrDetailScreen';
+export * from './InspectionScreen';

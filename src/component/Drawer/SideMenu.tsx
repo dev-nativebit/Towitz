@@ -79,7 +79,7 @@ export const SideMenu: React.FC<DeleteDocumentModelProps> = ({
           case 'Inspection':
           onClosePress();
             navigate({
-              screenName:Routes.QRScanner,
+              screenName:Routes.Inspection,
             });
           onOptionSelected(TopTabEnum.Inspection);
           break;
