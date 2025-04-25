@@ -3,3 +3,4 @@ export * from './LoginApi';
 export * from './LogoutApi';
 export * from './GetRequestListApi';
 export * from './ApproveRequestApi';
+export * from './GetQrCodeDetailApi';

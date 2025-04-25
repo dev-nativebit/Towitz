@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Screen, StatusBarType, Text} from '@/component';
+import {hideFullScreenProgress, Screen, showFullScreenProgress, StatusBarType, Text} from '@/component';
 import {useTheme} from '@shopify/restyle';
 import {Theme} from '@/style';
 import {Camera, useCameraDevice, useCodeScanner} from 'react-native-vision-camera';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {goBack} from '@/navigation/AppNavigation';
+import {GetQrCodeDetailApiParams} from '@/api';
+import {actions} from '@/redux/root.store';
+import {qrCodeDetailApiThunkCall} from '@/redux/thunk/RequestThunk';
 
 
 export const QRScannerScreen:React.FC = () => {
@@ -11,16 +15,31 @@ export const QRScannerScreen:React.FC = () => {
   const [hasPermission, setHasPermission] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const device = useCameraDevice("back");
+  const [qrValue, setQrValue] = useState('');
 
   const codeScanner = useCodeScanner({
     codeTypes: ["qr"],
-    onCodeScanned: (codes) => {
-      // console.log(`onCodeScanned `, codes);
-      console.log(`onCodeScanned value`, codes[0].value);
-      // props.onRead(codes[0].value);
+    onCodeScanned: (codes,frame) => {
+      setQrValue(codes[0].value ?? '')
+      if (qrValue !== codes[0].value && codes[0].value) {
+        callQrDetailApi(codes[0].value)
+      }
     },
   });
 
+  const callQrDetailApi = (value:string) =>{
+    const params:GetQrCodeDetailApiParams ={
+      qr_value:value
+    }
+    showFullScreenProgress()
+    actions.qrCodeDetailApiThunkCallActions(params).then(response => {
+      hideFullScreenProgress()
+      setQrValue('')
+      if (response.isSuccess) {
+        //Navigate to Detail Screen
+      }
+    })
+  }
   useEffect(() => {
     // exception case
     setRefresh(!refresh);
@@ -77,7 +96,7 @@ export const QRScannerScreen:React.FC = () => {
               alignItems: "center",
             }}
             onPress={() => {
-              // props.onRead(null);
+             goBack()
             }}
           >
             <Text style={{ color: "snow", fontSize: 14 }}>Close</Text>

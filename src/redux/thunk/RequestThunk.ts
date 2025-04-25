@@ -1,10 +1,16 @@
 import {dispatchable} from '@/redux/dispatchable';
-import { approveRequestApi, ApproveRequestApiParams, getRequestListApi, GetRequestListApiParams } from "@/api";
+import {
+  approveRequestApi,
+  ApproveRequestApiParams,
+  getQrCodeDetailApi, GetQrCodeDetailApiParams,
+  getRequestListApi,
+  GetRequestListApiParams,
+} from '@/api';
 import {Dispatch} from 'react';
 import {Action} from 'redux-saga';
 import {getDefaultError, Result} from '@/core';
-import {RequestList} from '@/model';
-import {RequestDto} from '@/dtos';
+import {QrCodeDetailModel, RequestList} from '@/model';
+import {QrCodeDetailDto, RequestDto} from '@/dtos';
 import {ToastAndroid} from 'react-native';
 import {requestActions} from '@/redux/slice/RequestSlice';
 
@@ -65,6 +71,37 @@ export const approveRequestApiThunkCall = dispatchable((params: ApproveRequestAp
       } catch (e) {
         //Dispatch to fail the response
         return getDefaultError(e, 'CATCH approveRequestApiThunkCall');
+      }
+    };
+  },
+);
+
+export const qrCodeDetailApiThunkCall = dispatchable((params: GetQrCodeDetailApiParams) => {
+    return async (dispatch: Dispatch<Action>) => {
+      try {
+        dispatch(requestActions.QrCodeDetail(Result.waiting()));
+        const response = await getQrCodeDetailApi.post(params);
+
+        if (response.isSuccess) {
+          //Parse dto from api response top model
+          const dataModel = new QrCodeDetailModel(response.data as QrCodeDetailDto)
+          // await LoginAgainThunkCall();
+          //Wrap with result class
+          const resultDataModel = Result.ok(dataModel);
+          //Dispatch to store in to redux
+          dispatch(requestActions.QrCodeDetail(resultDataModel));
+          ToastAndroid.show(response?.message ?? '', ToastAndroid.LONG);
+          //Return the result, so it can be used where api triggered
+          return response;
+        } else {
+          ToastAndroid.show(response?.error ?? '', ToastAndroid.LONG);
+        }
+        //Dispatch to fail the response
+        dispatch(requestActions.QrCodeDetail(Result.fail('qrCodeDetailApiThunkCall')));
+        return getDefaultError(response.error, 'qrCodeDetailApiThunkCall');
+      } catch (e) {
+        //Dispatch to fail the response
+        return getDefaultError(e, 'CATCH qrCodeDetailApiThunkCall');
       }
     };
   },

@@ -2,7 +2,11 @@ import {configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {ClearReduxThunkCall, LoginAgainThunkCall, LoginThunkCall} from '@/redux/thunk/LoginThunk';
 import {loginReducer} from '@/redux/slice/LoginSlice';
-import { approveRequestApiThunkCall, getRequestListApiThunkCall } from "@/redux/thunk/RequestThunk";
+import {
+  approveRequestApiThunkCall,
+  getRequestListApiThunkCall,
+  qrCodeDetailApiThunkCall,
+} from '@/redux/thunk/RequestThunk';
 import { requestReducer } from "@/redux/slice/RequestSlice";
 
 export const actions = {
@@ -11,6 +15,7 @@ export const actions = {
   getRequestListApiThunkCallActions: getRequestListApiThunkCall,
   approveRequestApiThunkCallActions: approveRequestApiThunkCall,
   ClearReduxThunkCallActions: ClearReduxThunkCall,
+  qrCodeDetailApiThunkCallActions: qrCodeDetailApiThunkCall,
 
 };
 

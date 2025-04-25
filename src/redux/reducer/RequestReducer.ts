@@ -1,6 +1,6 @@
 import {Result} from '@/core';
 import {PayloadAction} from '@reduxjs/toolkit';
-import { RequestList } from "@/model";
+import {QrCodeDetailModel, RequestList} from '@/model';
 import { RequestSliceType } from "@/redux/slice/RequestSlice";
 
 export default {
@@ -15,6 +15,12 @@ export default {
     action: PayloadAction<Result<string>>,
   ) => {
     state.approveRequest = action.payload;
+  },
+  'QrCodeDetail': (
+    state: RequestSliceType,
+    action: PayloadAction<Result<QrCodeDetailModel>>,
+  ) => {
+    state.QrCodeDetail = action.payload;
   },
   // 'forceUpdate': (state:LoginSliceType, action:PayloadAction<Result<ForceUpdateModel>>) =>{
   //   state.forceUpdate = action.payload;
