@@ -2,7 +2,11 @@ import {HttpPost, ResultCommonInterfaces} from '@/Interfaces';
 import {http, Result} from '@/core';
 import {GET_PRODUCT_LIST} from '@/api/EndPoint';
 
-export interface GetProductListApiParams {}
+export interface GetProductListApiParams {
+  start: string;
+  length: string;
+  search: string;
+}
 
 class GetProductListApi implements HttpPost<ResultCommonInterfaces>{
   post = async (params: GetProductListApiParams): Promise<Result<ResultCommonInterfaces>> => {

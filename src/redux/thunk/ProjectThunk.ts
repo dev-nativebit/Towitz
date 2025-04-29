@@ -24,7 +24,7 @@ export const getProductListApiThunkCall = dispatchable((params: GetProductListAp
 
         if (response.isSuccess) {
           //Parse dto from api response top model
-          const dataModel = new GetProductList(response.data as GetProductDto[]);
+          const dataModel = new GetProductList(response.data.productList as GetProductDto[]);
           // await LoginAgainThunkCall();
           //Wrap with result class
           const resultDataModel = Result.ok(dataModel);

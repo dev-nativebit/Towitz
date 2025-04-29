@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Box, Screen, StatusBarType} from '@/component';
+import {Box, FloatingButton, Screen, StatusBarType} from '@/component';
 import {useTheme} from '@shopify/restyle';
 import {Theme} from '@/style';
 import {FlatList, RefreshControl} from 'react-native';
@@ -24,6 +24,9 @@ export const ProductScreen:React.FC = () =>{
 
   const callApi = () => {
     const params: GetProductListApiParams = {
+      length:'120',
+      search:'',
+      start:'0'
     };
     actions.getProductListApiThunkCallActions(params).then();
   };
@@ -37,7 +40,7 @@ export const ProductScreen:React.FC = () =>{
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    // callApi();
+    callApi();
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);
@@ -83,12 +86,13 @@ export const ProductScreen:React.FC = () =>{
                 />
               </Box>
             }
-            ListFooterComponent={<Box height={200} />}
+            ListFooterComponent={<Box height={120} />}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
           />
       </Box>
+      <FloatingButton bottom={30} onPress={() =>{}} />
     </Screen>
   )
 }

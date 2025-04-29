@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Text} from '@/component';
+import {Box, Image, Text} from '@/component';
 import {DeviceHelper} from '@/helper';
 import {fonts} from '@/style';
 import {GetProductModel} from '@/model';
@@ -16,23 +16,36 @@ export const ProductCard:React.FC<ProductCardProps> = ({onPress,item}:ProductCar
       marginHorizontal={'s'}
       width={'29%'}
       justifyContent={'center'}
+      flexGrow={1}
     >
       <Box
-        padding={'e6'}
         borderRadius={12}
         borderWidth={1}
-        height={DeviceHelper.calculateHeightRatio(120)}
+        flexGrow={1}
+        height={DeviceHelper.calculateHeightRatio(155)}
+        alignItems={'center'}
         borderColor={'primaryColor'}
       >
+        <Image
+          source={{uri:item.item_image}}
+          padding={'e6'}
+          width={DeviceHelper.calculateWidthRatio(82)}
+          height={DeviceHelper.calculateHeightRatio(100)}
+          resizeMode={'contain'}
+        />
           <Text
-            fontSize={DeviceHelper.calculateFontSize(13.5)}
+            fontSize={DeviceHelper.calculateFontSize(12)}
             color={'eerieBlack'}
             fontFamily={fonts.Merienda_bold}
-            textAlign={'center'}
-            marginTop={'sr'}
+            paddingHorizontal={'e6'}
+            paddingBottom={'es'}
             fontWeight={'800'}
+            style={{
+              position:'absolute',
+              bottom:0
+            }}
           >
-            {'item.monitorName'}
+            {item.item_name}
           </Text>
 
       </Box>
