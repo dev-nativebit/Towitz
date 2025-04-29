@@ -8,6 +8,8 @@ import {
   qrCodeDetailApiThunkCall, saveInspectionApiThunkCall,
 } from '@/redux/thunk/RequestThunk';
 import { requestReducer } from "@/redux/slice/RequestSlice";
+import {getProductListApiThunkCall} from '@/redux/thunk/ProjectThunk';
+import {productReducer} from '@/redux/slice/ProductSlice';
 
 export const actions = {
   LoginThunkCallActions: LoginThunkCall,
@@ -18,12 +20,14 @@ export const actions = {
   qrCodeDetailApiThunkCallActions: qrCodeDetailApiThunkCall,
   saveInspectionApiThunkCallActions: saveInspectionApiThunkCall,
   getInspectionListApiThunkCallActions: getInspectionListApiThunkCall,
+  getProductListApiThunkCallActions: getProductListApiThunkCall,
 
 };
 
 export const reducers = {
   loginDetail: loginReducer,
   requestDetail: requestReducer,
+  productDetail: productReducer,
 };
 
 export const store = configureStore({

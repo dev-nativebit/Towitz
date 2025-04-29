@@ -6,3 +6,4 @@ export * from './ApproveRequestApi';
 export * from './GetQrCodeDetailApi';
 export * from './SaveInspectionApi';
 export * from './GetInspectionListApi';
+export * from './GetProductListApi';

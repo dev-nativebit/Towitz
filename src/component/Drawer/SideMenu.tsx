@@ -17,6 +17,7 @@ export enum TopTabEnum {
   Profile = 'Profile',
   Logout = 'Logout',
   Inspection = 'Inspection',
+  Product = 'Product',
 }
 
 export interface DeleteDocumentModelProps {
@@ -58,6 +59,8 @@ export const SideMenu: React.FC<DeleteDocumentModelProps> = ({
           return Images.checked
         case 'Profile':
           return Images.profile
+        case 'Product':
+          return Images.profile
         default:
           return Images.home
       }
@@ -83,6 +86,13 @@ export const SideMenu: React.FC<DeleteDocumentModelProps> = ({
             });
           onOptionSelected(TopTabEnum.Inspection);
           break;
+          case 'Product':
+          onClosePress();
+            navigate({
+              screenName:Routes.Product,
+            });
+          onOptionSelected(TopTabEnum.Product);
+          break;
         case 'Logout':
           onClosePress()
           setIsVisibleLogout(true)
@@ -93,6 +103,7 @@ export const SideMenu: React.FC<DeleteDocumentModelProps> = ({
   const array =[
     {menuName:'Dashboard'},
     {menuName:'Inspection'},
+    {menuName:'Product'},
     {menuName:'Profile'},
     {menuName:'Logout'},
   ]

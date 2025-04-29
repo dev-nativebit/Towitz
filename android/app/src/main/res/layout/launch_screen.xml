@@ -2,12 +2,12 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:background="#ffffff"
+        android:background="#E8E7EA"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <ImageView
-            android:layout_height="300dp"
-            android:layout_width="350dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/splashicon" />
+    <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/src_anim"
+    />
 </RelativeLayout>

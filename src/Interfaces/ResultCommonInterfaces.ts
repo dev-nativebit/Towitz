@@ -1,9 +1,9 @@
-import {InspectionDto, LoginDto, QrCodeDetailDto, RequestDto} from '@/dtos';
+import {GetProductDto, InspectionDto, LoginDto, QrCodeDetailDto, RequestDto} from '@/dtos';
 
 export interface ResultCommonInterfaces {
   message: string;
   success: number | boolean;
-  data: LoginDto | RequestDto[] | QrCodeDetailDto | InspectionDto[];
+  data: LoginDto | RequestDto[] | QrCodeDetailDto | InspectionDto[] |GetProductDto[];
   // current_page: number;
   // total_pages: number;
   // per_page_record: number;

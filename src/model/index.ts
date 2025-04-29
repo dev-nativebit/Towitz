@@ -14,3 +14,5 @@ export * from './ReasonList';
 export * from './QrCodeDetailModel';
 export * from './InspectionModel';
 export * from './InspectionList';
+export * from './GetProductModel';
+export * from './GetProductList';

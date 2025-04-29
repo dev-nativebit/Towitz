@@ -3,3 +3,4 @@ export * from './LoginDto';
 export * from './RequestDto';
 export * from './QrCodeDetailDto';
 export * from './InspectionDto';
+export * from './GetProductDto';
