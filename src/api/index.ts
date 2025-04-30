@@ -8,3 +8,4 @@ export * from './SaveInspectionApi';
 export * from './GetInspectionListApi';
 export * from './GetProductListApi';
 export * from './AddProductApi';
+export * from './SaveProductApi';

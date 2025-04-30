@@ -16,4 +16,10 @@ export default {
   ) => {
     state.addProduct = action.payload;
   },
+  saveProduct: (
+    state: ProductSliceType,
+    action: PayloadAction<Result<string>>,
+  ) => {
+    state.saveProduct = action.payload;
+  },
 };

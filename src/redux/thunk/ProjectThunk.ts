@@ -5,7 +5,7 @@ import {
   ApproveRequestApiParams, getInspectionListApi, GetInspectionListApiParams, getProductListApi, GetProductListApiParams,
   getQrCodeDetailApi, GetQrCodeDetailApiParams,
   getRequestListApi,
-  GetRequestListApiParams, saveInspectionApi, SaveInspectionApiParams,
+  GetRequestListApiParams, saveInspectionApi, SaveInspectionApiParams, saveProductApi, SaveProductApiParams,
 } from '@/api';
 import {Dispatch} from 'react';
 import {Action} from 'redux-saga';
@@ -72,6 +72,37 @@ export const addProductApiThunkCall = dispatchable(() => {
       } catch (e) {
         //Dispatch to fail the response
         return getDefaultError(e, 'CATCH addProductApiThunkCall');
+      }
+    };
+  },
+);
+
+export const saveProductApiThunkCall = dispatchable((params:SaveProductApiParams,formData:FormData) => {
+    return async (dispatch: Dispatch<Action>) => {
+      try {
+        dispatch(productActions.saveProduct(Result.waiting()));
+        const response = await saveProductApi.post(params,formData);
+
+        if (response.isSuccess) {
+          //Parse dto from api response top model
+          const dataModel = response.data;
+          // await LoginAgainThunkCall();
+          //Wrap with result class
+          const resultDataModel = Result.ok(dataModel);
+          //Dispatch to store in to redux
+          dispatch(productActions.saveProduct(resultDataModel));
+          //Return the result, so it can be used where api triggered
+          ToastAndroid.show(response?.message ?? '', ToastAndroid.LONG);
+          return response;
+        } else {
+          ToastAndroid.show(response?.error ?? '', ToastAndroid.LONG);
+        }
+        //Dispatch to fail the response
+        dispatch(productActions.saveProduct(Result.fail('saveProductApiThunkCall')));
+        return getDefaultError(response.error, 'saveProductApiThunkCall');
+      } catch (e) {
+        //Dispatch to fail the response
+        return getDefaultError(e, 'CATCH saveProductApiThunkCall');
       }
     };
   },

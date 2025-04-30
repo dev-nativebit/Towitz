@@ -1,13 +1,26 @@
-import React, {useMemo} from 'react';
-import {Box, Button, Forms, Screen, StatusBarType} from '@/component';
+import React, {useMemo, useState} from 'react';
+import {
+  Box,
+  Button,
+  Forms,
+  hideFullScreenProgress, Image,
+  Screen,
+  showFullScreenProgress,
+  StatusBarType,
+  Text,
+} from '@/component';
 import {useTheme} from '@shopify/restyle';
-import {Theme} from '@/style';
-import {ScrollView} from 'react-native';
+import {fonts, Theme} from '@/style';
+import {ScrollView, ToastAndroid} from 'react-native';
 import {DeviceHelper} from '@/helper';
 import {useForm} from 'react-hook-form';
-import {customFormGenerator} from '@/customFormGenerator';
-import {RootState, useAppSelector} from '@/redux/root.store';
-import {AddProductList, GetProductList} from '@/model';
+import {customFormGenerator, ProductIDs} from '@/customFormGenerator';
+import {actions, RootState, useAppSelector} from '@/redux/root.store';
+import {AddProductList} from '@/model';
+import {SaveProductApiParams} from '@/api';
+import {goBack} from '@/navigation/AppNavigation';
+import {ImageSelectionButton} from '@/component/ImageSelectionButton';
+import {Asset} from 'react-native-image-picker';
 
 
 export const AddProductScreen:React.FC =() =>{
@@ -22,6 +35,7 @@ export const AddProductScreen:React.FC =() =>{
   const addProductResult = useAppSelector(
     (state: RootState) => state.productDetail.addProduct,
   );
+  const [selectedImage, setSelectedImage] = useState<Asset>();
 
   const categoryList = useMemo(() => {
     if (addProductResult?.isSuccess) {
@@ -30,8 +44,42 @@ export const AddProductScreen:React.FC =() =>{
     return new AddProductList();
   }, [addProductResult])
 
-  const handelOnPress =() =>{
+  const submit = () =>{
+    let formData: FormData = new FormData();
 
+    if (selectedImage){
+      formData.append('item_image', {
+        // @ts-ignore
+        uri: selectedImage.uri,
+        type: selectedImage.type ?? '',
+        name: selectedImage.fileName,
+      });
+    }else {
+      return ToastAndroid.show( 'Image is required', ToastAndroid.LONG);
+    }
+
+    const params:SaveProductApiParams={
+      id: '',
+      category: getValues()[ProductIDs.Category],
+      item_code: getValues()[ProductIDs.ItemCode],
+      item_name:getValues()[ProductIDs.ItemName]
+    }
+    showFullScreenProgress()
+    actions.saveProductApiThunkCallActions(params,formData).then(async res =>{
+      hideFullScreenProgress()
+      if (res.isSuccess){
+        await actions.getProductListApiThunkCallActions({
+          length:'120',
+          search:'',
+          start:'0'
+        })
+        goBack()
+      }
+    })
+  }
+
+  const handelOnPress =() =>{
+    handleSubmit(submit)()
   }
 
   const form = useMemo(() => customFormGenerator.generateProductForm(categoryList), [categoryList]);
@@ -48,15 +96,46 @@ export const AddProductScreen:React.FC =() =>{
             errors={errors}
             setValue={setValue}
           />
+          {
+            selectedImage && (
+              <Box
+                borderWidth={1}
+                borderRadius={5}
+                flexWrap="nowrap"
+                overflow="hidden"
+                backgroundColor={'white'}
+                marginHorizontal={'sr'}
+                marginTop={'m'}
+                paddingBottom={'r'}
+                borderColor={'darkGray2'}>
+                <Text
+                  color={'gray'}
+                  fontFamily={fonts.medium}
+                  paddingStart={'s'}
+                  paddingTop={'s'}
+                  fontSize={14}>
+                  {'Photo'}
+                </Text>
+                <Image
+                  source={{uri:selectedImage?.uri}}
+                  height={75}
+                  marginStart={'sr'}
+                  marginTop={'sr'}
+                  width={80}
+                  borderRadius={8}
+                />
+              </Box>
+            )
+          }
 
-          <Box marginHorizontal={'r'} marginTop={'m'}>
-            <Button
-              label={'Save'}
-              onPress={handelOnPress}
-            />
-          </Box>
         </Box>
       </ScrollView>
+      <Box marginHorizontal={'r'} marginTop={'m'}>
+        <ImageSelectionButton
+          onPress={handelOnPress}
+          onAttachmentPress={setSelectedImage}
+        />
+      </Box>
     </Screen>
   )
 }

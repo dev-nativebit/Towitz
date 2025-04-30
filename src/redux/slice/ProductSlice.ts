@@ -7,11 +7,13 @@ import ProductReducer from '@/redux/reducer/ProductReducer';
 export interface ProductSliceType {
   productList?: Result<GetProductList>;
   addProduct?: Result<AddProductList>;
+  saveProduct?: Result<string>;
 }
 
 export const initialState: ProductSliceType = {
   productList: undefined,
   addProduct:undefined,
+  saveProduct:undefined,
 };
 
 const RequestSlice = createSlice({
