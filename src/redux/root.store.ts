@@ -8,7 +8,7 @@ import {
   qrCodeDetailApiThunkCall, saveInspectionApiThunkCall,
 } from '@/redux/thunk/RequestThunk';
 import { requestReducer } from "@/redux/slice/RequestSlice";
-import {getProductListApiThunkCall} from '@/redux/thunk/ProjectThunk';
+import {addProductApiThunkCall, getProductListApiThunkCall} from '@/redux/thunk/ProjectThunk';
 import {productReducer} from '@/redux/slice/ProductSlice';
 
 export const actions = {
@@ -21,6 +21,7 @@ export const actions = {
   saveInspectionApiThunkCallActions: saveInspectionApiThunkCall,
   getInspectionListApiThunkCallActions: getInspectionListApiThunkCall,
   getProductListApiThunkCallActions: getProductListApiThunkCall,
+  addProductApiThunkCallActions: addProductApiThunkCall,
 
 };
 

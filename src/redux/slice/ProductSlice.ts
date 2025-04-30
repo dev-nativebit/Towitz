@@ -1,16 +1,17 @@
 import {Result} from '@/core';
-import {GetProductList, InspectionList, QrCodeDetailModel, RequestList} from '@/model';
+import {AddProductList, GetProductList} from '@/model';
 import {createSlice} from '@reduxjs/toolkit';
-import {PRODUCT, REQUEST} from '@/redux/slice/Types';
-import RequestReducer from "@/redux/reducer/RequestReducer";
+import {PRODUCT} from '@/redux/slice/Types';
 import ProductReducer from '@/redux/reducer/ProductReducer';
 
 export interface ProductSliceType {
   productList?: Result<GetProductList>;
+  addProduct?: Result<AddProductList>;
 }
 
 export const initialState: ProductSliceType = {
   productList: undefined,
+  addProduct:undefined,
 };
 
 const RequestSlice = createSlice({

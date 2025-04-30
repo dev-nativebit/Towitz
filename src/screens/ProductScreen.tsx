@@ -9,6 +9,7 @@ import {DeviceHelper} from '@/helper';
 import {actions, RootState, useAppSelector} from '@/redux/root.store';
 import {GetProductList} from '@/model';
 import {GetProductListApiParams} from '@/api';
+import {navigate, Routes} from '@/navigation/AppNavigation';
 
 
 export const ProductScreen:React.FC = () =>{
@@ -92,7 +93,15 @@ export const ProductScreen:React.FC = () =>{
             }
           />
       </Box>
-      <FloatingButton bottom={30} onPress={() =>{}} />
+      <FloatingButton
+        bottom={30}
+        onPress={async () =>{
+         await actions.addProductApiThunkCallActions()
+          navigate({
+            screenName:Routes.AddProduct
+          })
+        }}
+      />
     </Screen>
   )
 }

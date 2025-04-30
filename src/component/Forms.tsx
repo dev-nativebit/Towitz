@@ -96,6 +96,7 @@ export const Forms: React.FC<FormsProps> = ({
                     isBottomBorder={isBottomBorder}
                     onPress={() => {}}
                     disable={false}
+
                     onVerify={onVerify}
                     isBottomMargin={true}
                   />
@@ -114,6 +115,7 @@ export const Forms: React.FC<FormsProps> = ({
                         });
                       }
                     }}
+                    height={50}
                     selectedValue={value}
                     hasError={!!errors[`${formField.name}`]}
                     errorType={String(errors[`${formField.name}`]?.type)}

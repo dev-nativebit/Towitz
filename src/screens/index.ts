@@ -5,3 +5,4 @@ export * from './QRScannerScreen';
 export * from './QrDetailScreen';
 export * from './InspectionScreen';
 export * from './ProductScreen';
+export * from './AddProductScreen';

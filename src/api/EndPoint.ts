@@ -8,3 +8,4 @@ export const GET_QRCODE_DETAIL = (): string => `${BASE_URL}/inspection/getQrCode
 export const SAVE_INSPECTION = (): string => `${BASE_URL}/inspection/saveInspection`;
 export const GET_INSPECTION_LIST = (): string => `${BASE_URL}/inspection/getInspectionList`;
 export const GET_PRODUCT_LIST = (): string => `${BASE_URL}/product/getProductListing`;
+export const ADD_PRODUCT = (): string => `${BASE_URL}/product/addProduct`;

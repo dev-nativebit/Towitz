@@ -13,6 +13,7 @@ import {
 import {Storage} from '@/core/Storage';
 import RNSplashScreen from 'react-native-splash-screen';
 import {
+  AddProductScreen,
   DashboardScreen, InspectionScreen,
   LoginScreen, ProductScreen, QrDetailScreen, QRScannerScreen, RequestDetailScreen,
 } from '@/screens';
@@ -29,6 +30,7 @@ export type StackParamList = {
   QrDetailScreen:undefined
   InspectionScreen:undefined
   ProductScreen:undefined
+  AddProductScreen:undefined
 };
 
 const navigationRef = createNavigationContainerRef<StackParamList>();
@@ -41,6 +43,7 @@ export enum Routes {
   QrDetail = 'QrDetailScreen',
   Inspection = 'InspectionScreen',
   Product = 'ProductScreen',
+  AddProduct = 'AddProductScreen',
 }
 export interface NavigationProps {
   screenName: Routes;
@@ -212,6 +215,11 @@ export const AppNavigator: React.FunctionComponent<AppNavigationProps> = ({
           <Stack.Screen
             name={Routes.Product}
             component={ProductScreen}
+            options={horizontalAnimation}
+          />
+          <Stack.Screen
+            name={Routes.AddProduct}
+            component={AddProductScreen}
             options={horizontalAnimation}
           />
         </Stack.Navigator>

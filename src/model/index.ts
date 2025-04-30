@@ -16,3 +16,5 @@ export * from './InspectionModel';
 export * from './InspectionList';
 export * from './GetProductModel';
 export * from './GetProductList';
+export * from './AddProductModel';
+export * from './AddProductList';

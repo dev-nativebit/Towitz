@@ -1,6 +1,6 @@
 import {Result} from '@/core';
 import {PayloadAction} from '@reduxjs/toolkit';
-import {GetProductList} from '@/model';
+import {AddProductList, GetProductList} from '@/model';
 import {ProductSliceType} from '@/redux/slice/ProductSlice';
 
 export default {
@@ -9,5 +9,11 @@ export default {
     action: PayloadAction<Result<GetProductList>>,
   ) => {
     state.productList = action.payload;
+  },
+  addProduct: (
+    state: ProductSliceType,
+    action: PayloadAction<Result<AddProductList>>,
+  ) => {
+    state.addProduct = action.payload;
   },
 };

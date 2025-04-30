@@ -7,3 +7,4 @@ export * from './GetQrCodeDetailApi';
 export * from './SaveInspectionApi';
 export * from './GetInspectionListApi';
 export * from './GetProductListApi';
+export * from './AddProductApi';
