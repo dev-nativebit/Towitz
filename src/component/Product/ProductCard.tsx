@@ -16,7 +16,6 @@ export const ProductCard:React.FC<ProductCardProps> = ({onPress,item}:ProductCar
       marginHorizontal={'s'}
       width={'29%'}
       justifyContent={'center'}
-      flexGrow={1}
     >
       <Box
         borderRadius={12}

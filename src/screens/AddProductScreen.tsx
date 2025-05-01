@@ -1,7 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {
   Box,
-  Button,
   Forms,
   hideFullScreenProgress, Image,
   Screen,
