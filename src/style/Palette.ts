@@ -140,4 +140,6 @@ export const palette = {
 	brand101:'#C0D9E3',
 	brandextra100:'#EDF5F7',
 	transparent:'rgba(0, 0, 0, 0.2)',
+  dark2:'#2F2F2F',
+  light:'#C6E8CB',
 };
