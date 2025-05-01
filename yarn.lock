@@ -4393,6 +4393,11 @@ get-symbol-description@^1.1.0:
     es-errors "^1.3.0"
     get-intrinsic "^1.2.6"
 
+gifted-charts-core@0.1.62:
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/gifted-charts-core/-/gifted-charts-core-0.1.62.tgz#87cccde9fb6b9c8c4fd25f7664b5b04657ee9a1c"
+  integrity sha512-b3fweez3P+RojgC3BDpetC+rivvuKSvDtA9ydvnvxbfBoB6tOVEbY5Vq4tEGiLmt9XOBOJpRTJiFTgYtr0NreA==
+
 glob-parent@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
@@ -6684,6 +6689,13 @@ react-native-gesture-handler@2.20.1:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-gifted-charts@^1.4.60:
+  version "1.4.60"
+  resolved "https://registry.yarnpkg.com/react-native-gifted-charts/-/react-native-gifted-charts-1.4.60.tgz#5a73e46895d4679b6f2ce3f3b3ec297241bef2f5"
+  integrity sha512-cdbFSj8/kCxAw4yeJEOuZC4f4Fk9fdjNYSsS20OdyKqflmjVKl06NgMEZagTKFWNXX6TRHI5X9J2Ovk9P0DSPg==
+  dependencies:
+    gifted-charts-core "0.1.62"
+
 react-native-image-picker@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-8.2.0.tgz#d8656fdd1a0f1ad262c9c129d4f75900b685e56e"
@@ -6713,6 +6725,11 @@ react-native-keyboard-controller@^1.16.8:
   integrity sha512-JbpKNKStiA6Ud04dMSwObp8cCqNVk8CCb3c6TDFJVbirz+ALVulD6i8l3P6YhQGhA42Vpc3QHhuFlRtBrbQkcA==
   dependencies:
     react-native-is-edge-to-edge "^1.1.6"
+
+react-native-linear-gradient@^2.8.3:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz#9a116649f86d74747304ee13db325e20b21e564f"
+  integrity sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==
 
 react-native-logs@5.1.0:
   version "5.1.0"

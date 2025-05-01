@@ -28,6 +28,6 @@ export * from './TimePicker';
 export * from './logoutBottomSheet';
 export * from './TabAnimationView';
 export * from './SelectImageOption';
-export * from './Dashboard';
+export * from './Request';
 export * from './ResignBottomSheet';
 export * from './Drawer';

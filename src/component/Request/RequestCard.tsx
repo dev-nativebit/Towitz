@@ -5,12 +5,12 @@ import { fonts } from "@/style";
 import moment from "moment";
 import { RequestModel } from "@/model";
 
-export interface DashboardCardProps {
+export interface RequestCardProps {
   onPress:()=>void
   item:RequestModel
 }
 
-export const DashboardCard:React.FC<DashboardCardProps> = ({onPress,item}:DashboardCardProps) =>{
+export const RequestCard:React.FC<RequestCardProps> = ({onPress,item}:RequestCardProps) =>{
   return(
     <Pressable
       onPress={onPress}
