@@ -9,3 +9,4 @@ export * from './GetInspectionListApi';
 export * from './GetProductListApi';
 export * from './AddProductApi';
 export * from './SaveProductApi';
+export * from './DashboardApi';

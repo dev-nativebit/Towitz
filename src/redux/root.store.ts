@@ -1,6 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
-import {ClearReduxThunkCall, LoginAgainThunkCall, LoginThunkCall} from '@/redux/thunk/LoginThunk';
+import {
+  ClearReduxThunkCall,
+  dashboardApiThunkCall,
+  LoginAgainThunkCall,
+  LoginThunkCall,
+} from '@/redux/thunk/LoginThunk';
 import {loginReducer} from '@/redux/slice/LoginSlice';
 import {
   approveRequestApiThunkCall, getInspectionListApiThunkCall,
@@ -23,6 +28,7 @@ export const actions = {
   getProductListApiThunkCallActions: getProductListApiThunkCall,
   addProductApiThunkCallActions: addProductApiThunkCall,
   saveProductApiThunkCallActions: saveProductApiThunkCall,
+  dashboardApiThunkCallActions: dashboardApiThunkCall,
 
 };
 

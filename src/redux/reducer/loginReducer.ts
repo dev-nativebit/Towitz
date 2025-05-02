@@ -1,6 +1,6 @@
 import {Result} from '@/core';
 import {PayloadAction} from '@reduxjs/toolkit';
-import { LoginModel } from "@/model";
+import {DashboardModel, LoginModel} from '@/model';
 import {LoginSliceType} from '@/redux/slice/LoginSlice';
 
 export default {
@@ -15,5 +15,8 @@ export default {
   // },
   'projectId': (state:LoginSliceType, action:PayloadAction<Result<string>>) =>{
     state.projectId = action.payload;
+  },
+  'dashboard': (state:LoginSliceType, action:PayloadAction<Result<DashboardModel>>) =>{
+    state.dashboard = action.payload;
   },
 };

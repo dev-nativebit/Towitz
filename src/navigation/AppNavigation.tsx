@@ -129,8 +129,7 @@ export const AppNavigator: React.FunctionComponent<AppNavigationProps> = ({
       const response = await Storage.getItemAsync(Storage.keys.login);
       if (response !== null) {
         await actions.LoginAgainThunkCallActions();
-        // await actions.userPermissionThunkCallActions();
-        // await actions.dashboardThunkCallActions();
+        await actions.dashboardApiThunkCallActions();
         setInitRouteName(Routes.Dashboard);
       } else {
         setInitRouteName(Routes.Login);

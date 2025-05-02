@@ -1,5 +1,5 @@
 import {
-  AddProductDto,
+  AddProductDto, DashboardDto,
   GetProductDto,
   InspectionDto,
   LoginDto,
@@ -16,7 +16,8 @@ export interface ResultCommonInterfaces {
     | QrCodeDetailDto
     | InspectionDto[]
     | GetProductDto[]
-    | AddProductDto[];
+    | AddProductDto[]
+    | DashboardDto[]
   // current_page: number;
   // total_pages: number;
   // per_page_record: number;

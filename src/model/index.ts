@@ -18,3 +18,6 @@ export * from './GetProductModel';
 export * from './GetProductList';
 export * from './AddProductModel';
 export * from './AddProductList';
+export * from './ChartModel';
+export * from './StoreModel';
+export * from './DashboardModel';

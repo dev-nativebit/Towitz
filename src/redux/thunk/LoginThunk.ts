@@ -1,11 +1,11 @@
 import {dispatchable} from '@/redux/dispatchable';
-import { loginApi, LoginApiParams} from '@/api';
+import {dashboardApi, loginApi, LoginApiParams} from '@/api';
 import {Dispatch} from 'react';
 import {Action} from 'redux-saga';
 import {loginActions} from '@/redux/slice/LoginSlice';
 import {getDefaultError, Result, Storage} from '@/core';
-import { LoginModel} from '@/model';
-import { LoginDto} from '@/dtos';
+import {DashboardModel, LoginModel} from '@/model';
+import {DashboardDto, LoginDto} from '@/dtos';
 import {accountStore} from '@/stores/AccountStore';
 import {ToastAndroid} from 'react-native';
 
@@ -31,6 +31,7 @@ export const LoginThunkCall = dispatchable(
           //Dispatch to store in to redux
           dispatch(loginActions.UserDetail(resultDataModel));
           //Return the result, so it can be used where api triggered
+          await dashboardApiThunkCall()
           ToastAndroid.show(response?.message ?? '', ToastAndroid.LONG);
           return response;
         } else {
@@ -42,6 +43,34 @@ export const LoginThunkCall = dispatchable(
       } catch (e) {
         //Dispatch to fail the response
         return getDefaultError(e, 'CATCH LoginThunkCall');
+      }
+    };
+  },
+);
+export const dashboardApiThunkCall = dispatchable(() => {
+    return async (dispatch: Dispatch<Action>) => {
+      try {
+        dispatch(loginActions.dashboard(Result.waiting()));
+        const response = await dashboardApi.post({version_code:'1'});
+
+        if (response.isSuccess) {
+          //Parse dto from api response top model
+          const dataModel = new DashboardModel(response.data as DashboardDto);
+          //Wrap with result class
+          const resultDataModel = Result.ok(dataModel);
+          //Dispatch to store in to redux
+          dispatch(loginActions.dashboard(resultDataModel));
+          //Return the result, so it can be used where api triggered
+          return response;
+        } else {
+          ToastAndroid.show(response?.error ?? '', ToastAndroid.LONG);
+        }
+        //Dispatch to fail the response
+        dispatch(loginActions.dashboard(Result.fail('dashboardApiThunkCall')));
+        return getDefaultError(response.error, 'dashboardApiThunkCall');
+      } catch (e) {
+        //Dispatch to fail the response
+        return getDefaultError(e, 'CATCH dashboardApiThunkCall');
       }
     };
   },
